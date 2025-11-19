@@ -20,7 +20,7 @@ body {
   color: var(--cor-text1);
   font-family: "Montserrat", sans-serif;
 
-  background-image: url(/background.svg);
+  background-image: url(background.svg);
   background-size: 10%;
 }
 
