@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+}
+
+:root{
+  --cor-bg: #181519;
+  --cor-text1: rgb(232,232,232);
+  --cor-cinza: rgb(79,66,94);
+  --cor-destak: rgba(132, 18, 255, 1);
+  --cor-fundo:rgb(29, 3, 60);
+  --desiredHeight: 0px;
+}
+
+body {
+  background-color: var(--cor-bg);
+  display: grid;
+  text-align: center;
+  color: var(--cor-text1);
+  font-family: "Montserrat", sans-serif;
+
+  background-image: url(/background.svg);
+  background-size: 10%;
+}
+
+.Titulo{
+  margin: 15px;
+  color: var(--cor-text1);
+}
+
+.Container{
+  transition: 200ms;
+  transition: 200ms, height 150ms ease-out;
+  padding: 10px;
+  margin: 5px;
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-destak);
+  border-radius: 15px;
+  box-shadow: 0px 0px 3px 0px var(--cor-destak), 0px 8px 8px 0px black, inset 0px 10px 20px 0px rgba(255,255,255,0.15);
+}
+
+header{
+  position: sticky;
+  
+  top: 0;
+  box-shadow: 0px 10px 10px 0px var(--cor-bg);
+  margin-bottom: 8px;
+  z-index: 10;
+  h1{
+    text-shadow: 0px 0px 10px rgba(232, 232, 232, 0.3), 0px 8px 10px black;
+  }
+}
+
+.compartilhar{
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  background-color: transparent;
+  border: 0;
+  color: var(--cor-text1);
+  text-align: center;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: text-top;
+  div{
+    transform: translateY(-2px);
+  }
+}
+
+.Dados-Top{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.GRUPO-DADOS{
+  display: grid;
+  grid-template-columns: 30px 1fr 20px 100px 30px;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.GRUPO-STYLE{
+  border-radius: 50%;
+  border: 1px solid var(--cor-bg);
+  background-color: var(--cor-destak);
+}
+
+
+.GRUPO-ITENS{
+  display: grid;
+  grid-template-columns: 30px 2fr 1fr 1fr 30px;
+  gap: 5px;
+  border-bottom: 1px solid var(--cor-bg);
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+span{
+  white-space: nowrap;
+  font-size: 16px;
+  width: fit-content;
+  overflow: auto;
+  align-self: center;
+  justify-self: center;
+  color: var(--cor-text1);
+  
+}
+input{
+  min-width: 10px;
+  accent-color: var(--cor-destak);
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--cor-cinza);
+  color: var(--cor-text1);
+  appearance: textfield;
+  caret-color: var(--cor-text1);
+  border-bottom-color: var(--cor-destak);
+}
+input[type="number"] {
+  appearance: textfield;
+}
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.ITEM_Excluir, .GRUPO_Excluir, .GRUPO_ToggleRecolher, .GRUPO_Add{
+  width: 30px;
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-destak);
+  color: var(--cor-text1);
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 0px 0px;
+  text-shadow: 0px 0px 10px var(--cor-text1);
+}
+button{
+  cursor: pointer;
+  transition: 200ms;
+}
+button:active, .compartilhar:active {
+  transition: 60ms;
+  background-color: var(--cor-destak);
+  transform: scale(1.1);
+  box-shadow: 0px 0px 15px 0px var(--cor-destak);
+}
+button:hover {
+  box-shadow: 0px 0px 5px 0px var(--cor-destak);
+}
+
+.GRUPO_Add{
+  width: auto;
+  padding: 5px;
+}
+.GRUPOS_TODOS{
+  transform: translateY(0px);
+  opacity: 1;
+  transition: 150ms;
+  display: grid;
+  gap: 5px;
+}
+
+.item-subir{
+  transition: 150ms;
+  transform: translateY(-40px);
+}
+.item-gruposubir{
+  height: var(--desiredHeight);
+}
+
+.grupo-start{
+  transform: translateY(-105px);
+  opacity: 0;
+}
+
+.item-start{
+  transform: translateY(-40px);
+  opacity: 0;
+}
+
+.item-grupo-end{
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.FadeIn{
+  transition: 150ms;
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.FadeOut-item{
+  transition: 150ms;
+  transform: translateY(-40px);
+  opacity: 0;
+}
+
+.FadeOut-grupo{
+  transition: 150ms;
+  transform: translateY(-105px);
+  opacity: 0;
+}
+
+.recolhido{
+  display: none;
+}
+
+.rotateRecolher{
+  rotate: 180deg;
+}
