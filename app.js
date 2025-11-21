@@ -139,14 +139,7 @@ function ITEM_Add(element){
     }
 }
 
-function ITEM_Subirem(itens){
-  itens.forEach(iten => {
-    iten.classList.toggle('item-subir')
-    setTimeout(() => {
-      iten.classList.toggle('item-subir')      
-    }, 20000);
-  })
-}
+
 
 function ITEM_Checkbox(element){
     console.log("coisou")
@@ -189,15 +182,8 @@ function ITEM_Excluir(element){
     let itensDepois = itens.slice(indiceItem)
 
 
-    
-    itensDepois.forEach(item => {
-      item.classList.toggle('item-subir')
-      setTimeout(() => {
-        item.classList.toggle('item-subir')
-      }, 150);
-    });
-  
-    ITEM_GruposSubir(grupoAtual, itensDepois)
+    ITEM_Subirem(itensDepois)
+    ITEM_GruposSubir(grupoAtual, excluir_item)
     excluir_item.classList.toggle('item-grupo-end')
   
     setTimeout(() => {
@@ -216,18 +202,49 @@ function ITEM_Excluir(element){
   
 }
 
-function ITEM_GruposSubir(grupo, itens){
+function ITEM_Subirem(itens){
+  itens.forEach(iten => {
+    setTimeout(() => {
+      iten.classList.toggle('item-subir')
+    }, 1);
+    setTimeout(() => {
+      iten.classList.toggle('item-subir')      
+    }, 152);
+  })
+}
+
+function ITEM_GruposSubir(grupo, item){
 
   let grupoHeigthAntes = grupo.offsetHeight  
-  let grupoHeigthDepois = (grupoHeigthAntes - 40).toString() + 'px'
+  let itemHeight = item.offsetHeight + 20
+
+  let grupoHeigthDepois = (grupoHeigthAntes - itemHeight).toFixed(2) + 'px'
+  let grupoHeigthAtualPx = grupoHeigthAntes.toFixed(2) + 'px';
+  grupo.style.setProperty('height', grupoHeigthDepois);
+  grupo.style.setProperty('--currentHeight', grupoHeigthAtualPx)
   grupo.style.setProperty('--desiredHeight',grupoHeigthDepois)
   console.log(grupo.offsetHeight + " - " + grupoHeigthDepois)
+
+
   
   grupo.classList.toggle('item-gruposubir')
   setTimeout(() => {
     grupo.classList.toggle('item-gruposubir')
-  }, 150);
+    grupo.style.setProperty('height', grupoHeigthDepois);
+    grupo.style.removeProperty('--currentHeight');
+    grupo.style.removeProperty('--desiredHeight');
+  }, 1);
 
+}
+
+function Resetar(){
+  let inputs = document.querySelectorAll('input')
+  inputs.forEach(input => {
+    input.value = null
+    input.checked = false
+  })
+  localStorage.removeItem('saveLista')
+  window.location.reload()
 }
 
 function GRUPO_Excluir(element){

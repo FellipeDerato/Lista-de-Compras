@@ -11,6 +11,7 @@
   --cor-destak: rgba(132, 18, 255, 1);
   --cor-fundo:rgb(29, 3, 60);
   --desiredHeight: 0px;
+  --currentHeight: 0px;
 }
 
 body {
@@ -52,7 +53,7 @@ header{
   }
 }
 
-.compartilhar{
+.compartilhar, .resetar{
   position: absolute;
   top: 22px;
   right: 22px;
@@ -68,6 +69,9 @@ header{
   div{
     transform: translateY(-2px);
   }
+}
+.resetar{
+  left: 22px;
 }
 
 .Dados-Top{
@@ -160,6 +164,7 @@ button:hover {
   transition: 150ms;
   display: grid;
   gap: 5px;
+  height: var(--height);
 }
 
 .item-subir{
@@ -167,7 +172,22 @@ button:hover {
   transform: translateY(-40px);
 }
 .item-gruposubir{
-  height: var(--desiredHeight);
+  animation: grupoSubir 150ms;
+}
+
+@property --height {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: false;
+}
+
+@keyframes grupoSubir {
+  from {
+    --height: var(--currentHeight);
+  }
+  to {
+    --height: var(--desiredHeight);
+  }
 }
 
 .grupo-start{
