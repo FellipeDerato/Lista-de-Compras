@@ -127,6 +127,7 @@ function ITEM_Add(element){
     
     novo_item.classList.toggle('item-start')
     grupoAtual.appendChild(novo_item)
+    ITEM_GruposDescer(grupoAtual, novo_item)
   
     setTimeout(() => {
         novo_item.classList.toggle('FadeIn');
@@ -138,8 +139,6 @@ function ITEM_Add(element){
     }, 200);
     }
 }
-
-
 
 function ITEM_Checkbox(element){
     console.log("coisou")
@@ -173,9 +172,11 @@ function ITEM_PrecoChange(element){
 
 function ITEM_Excluir(element){
   
-  if (element.parentElement.parentElement.children.length > 2) {
+  if (element.parentElement.parentElement.children.length > 2 && element.parentElement.parentElement.dataset.animacaoSD == "false") {
     let excluir_item = element.parentElement
     let grupoAtual = excluir_item.parentElement;
+
+    grupoAtual.dataset.animacaoSD = "true"
     
     itens = Array.from(grupoAtual.children);
     let indiceItem = itens.indexOf(excluir_item) + 1;      
@@ -214,56 +215,83 @@ function ITEM_Subirem(itens){
 }
 
 function ITEM_GruposSubir(grupo, item){
+  let grupoHeight = grupo.offsetHeight;
+  let itemHeight = item.offsetHeight;
 
-  let grupoHeigthAntes = grupo.offsetHeight  
-  let itemHeight = item.offsetHeight + 20
+  grupo.style.height = `${grupoHeight - 23}px`;
 
-  let grupoHeigthDepois = (grupoHeigthAntes - itemHeight).toFixed(2) + 'px'
-  let grupoHeigthAtualPx = grupoHeigthAntes.toFixed(2) + 'px';
-  grupo.style.setProperty('height', grupoHeigthDepois);
-  grupo.style.setProperty('--currentHeight', grupoHeigthAtualPx)
-  grupo.style.setProperty('--desiredHeight',grupoHeigthDepois)
-  console.log(grupo.offsetHeight + " - " + grupoHeigthDepois)
-
-
-  
-  grupo.classList.toggle('item-gruposubir')
   setTimeout(() => {
-    grupo.classList.toggle('item-gruposubir')
-    grupo.style.setProperty('height', grupoHeigthDepois);
-    grupo.style.removeProperty('--currentHeight');
-    grupo.style.removeProperty('--desiredHeight');
-  }, 1);
+    grupo.style.height = `${grupoHeight - itemHeight - 23}px`;
+  }, 10);
 
+  setTimeout(() => {
+    grupo.style.removeProperty('height');
+    grupo.dataset.animacaoSD = "false"
+  }, 300);
 }
 
-function Resetar(){
-  let inputs = document.querySelectorAll('input')
-  inputs.forEach(input => {
-    input.value = null
-    input.checked = false
-  })
-  localStorage.removeItem('saveLista')
-  window.location.reload()
+function ITEM_GruposDescer(grupo, item){
+  let grupoHeight = grupo.offsetHeight;
+  let itemHeight = item.offsetHeight;
+
+  grupo.style.height = `${grupoHeight - 63}px`;
+  
+   setTimeout(() => {
+    grupo.style.height = `${grupoHeight + itemHeight - 63}px`;
+  }, 10);
+  
+  setTimeout(() => {
+    grupo.style.removeProperty('height');
+    grupo.dataset.animacaoSD = "false"
+  }, 300);
 }
 
 function GRUPO_Excluir(element){
-  if (baseGrupos.children.length > 1) {
-    let Grupo = element.parentElement.parentElement
-    if(Grupo.children.length > 2){
-      let grpExcluirEscolha = confirm("Tem certrza que quer excluir o Grupo?")
-      if (!grpExcluirEscolha) {return;}
+    if (baseGrupos.children.length <= 1) return;
+
+    const grupoParaExcluir = element.closest('.GRUPO');
+    if (!grupoParaExcluir) return;
+
+    if (grupoParaExcluir.querySelectorAll('.GRUPO-ITENS').length > 1) {
+        const confirmacao = confirm("Tem certeza que quer excluir o Grupo e todos os seus itens?");
+        if (!confirmacao) return;
     }
-    let grpExcluir = element.parentElement.parentElement
+
+    const alturaGrupo = grupoParaExcluir.offsetHeight + 5; // 5px de gap
+    const todosOsGrupos = Array.from(baseGrupos.children);
+    const indexExcluir = todosOsGrupos.indexOf(grupoParaExcluir);
+
+    const gruposParaSubir = todosOsGrupos.slice(indexExcluir + 1);
+    gruposParaSubir.forEach(grupo => {
+        grupo.style.transform = `translateY(-${alturaGrupo}px)`;
+    });
+
+    grupoParaExcluir.classList.add('FadeOut-grupo');
+
     setTimeout(() => {
-      grpExcluir.classList.toggle('FadeOut-grupo');
-    }, 1);
-    setTimeout(() => {
-      grpExcluir.classList.toggle('item-grupe-end')
-      grpExcluir.classList.toggle('FadeOut-grupo');
-      grpExcluir.remove()
-      calculoTotal()
+        grupoParaExcluir.remove();
+
+        gruposParaSubir.forEach(grupo => {
+            grupo.style.transition = 'none';
+            grupo.style.transform = 'translateY(0px)';
+            grupo.offsetHeight; // reflow
+            grupo.style.removeProperty('transition');
+        });
+
+        calculoTotal(); 
     }, 150);
+}
+
+function Resetar(){
+  let reseta = confirm("Quer mesmo resetar a Lista, seus Grupos e Itens apagando todos os seus conteúdos?")
+  if(reseta){
+    let inputs = document.querySelectorAll('input')
+    inputs.forEach(input => {
+      input.value = null
+      input.checked = false
+    })
+    localStorage.removeItem('saveLista')
+    window.location.reload()
   }
 }
 
@@ -537,4 +565,3 @@ function Importar() {
 
 
   
-

@@ -10,8 +10,7 @@
   --cor-cinza: rgb(79,66,94);
   --cor-destak: rgba(132, 18, 255, 1);
   --cor-fundo:rgb(29, 3, 60);
-  --desiredHeight: 0px;
-  --currentHeight: 0px;
+  --translateYgrupos: 0px
 }
 
 body {
@@ -31,8 +30,7 @@ body {
 }
 
 .Container{
-  transition: 200ms;
-  transition: 200ms, height 150ms ease-out;
+  transition: background-color 200ms, box-shadow 200ms, transform 200ms, height 150ms ease-out;
   padding: 10px;
   margin: 5px;
   background-color: var(--cor-fundo);
@@ -79,6 +77,8 @@ header{
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
+
+
 
 .GRUPO-DADOS{
   display: grid;
@@ -167,6 +167,10 @@ button:hover {
   height: var(--height);
 }
 
+.GRUPO {
+  transform: translateY(var(--translateYgrupos));
+}
+
 .item-subir{
   transition: 150ms;
   transform: translateY(-40px);
@@ -230,3 +234,4 @@ button:hover {
 .rotateRecolher{
   rotate: 180deg;
 }
+
