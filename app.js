@@ -424,6 +424,9 @@ function DVD(){
   if(escolha1 == 2) {
     Importar()
   }
+
+
+  
 }
 
 function Compartilhar(opt){
