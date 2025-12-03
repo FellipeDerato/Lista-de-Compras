@@ -257,7 +257,7 @@ function GRUPO_Excluir(element){
         if (!confirmacao) return;
     }
 
-    const alturaGrupo = grupoParaExcluir.offsetHeight + 5; // 5px de gap
+    const alturaGrupo = grupoParaExcluir.offsetHeight + 5; 
     const todosOsGrupos = Array.from(baseGrupos.children);
     const indexExcluir = todosOsGrupos.indexOf(grupoParaExcluir);
 
@@ -514,17 +514,16 @@ function Compartilhar(opt){
       linkDownload.style.display = 'none';
       document.body.appendChild(linkDownload);
       
-      linkDownload.click(); // Simula o clique para iniciar o download
+      linkDownload.click(); 
 
-// Passo 4: Limpar a URL temporária (boa prática)
 document.body.removeChild(linkDownload);
 URL.revokeObjectURL(url);
     }
     
   }
 }
+
 function Importar() {
-    // 1. Obter o input file escondido
     const fileInput = document.getElementById('file-input');
 
     if (!fileInput) {
@@ -532,20 +531,15 @@ function Importar() {
         return;
     }
 
-    // 2. Definir o que acontece quando um arquivo é selecionado
-    // (Deve ser redefinido a cada importação para garantir que o evento não dispare várias vezes)
     fileInput.onchange = function(event) {
         const file = event.target.files[0];
         
         if (file) {
-            // 3. Criar o leitor de arquivos
             const reader = new FileReader();
 
-            // Definir o que acontece quando o arquivo é lido
             reader.onload = function(e) {
                 const fileContent = e.target.result;
                 try {
-                    // O arquivo lido (fileContent) é o que você deve passar para carregarDados
                     carregarDados(fileContent);
                     alert("Dados importados com sucesso!");
                 } catch (error) {
@@ -554,15 +548,12 @@ function Importar() {
                 }
             };
 
-            // 4. Iniciar a leitura do arquivo como texto
             reader.readAsText(file);
         }
 
-        // 5. Limpar o valor do input para permitir que o mesmo arquivo seja importado novamente
         fileInput.value = null;
     };
 
-    // 6. Simular o clique: isso é o que abre a janela de seleção de arquivos
     fileInput.click();
 }
 
