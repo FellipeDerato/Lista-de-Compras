@@ -4,4 +4,7 @@
 
 <h2>Visual e Funcionalidades</h2>
 
-<img src="/Github/img1.png" alt="tela inicial do app">
+<img src="/Github/img1.png" alt="tela inicial do app" style="width: 300px">
+<video width="300" height="300" autoplay controls muted> 
+  <source src="/Github/vid1.mp4" type="video/mp4">
+</video>
