@@ -416,13 +416,16 @@ function carregarDados(importado){
 }
 
 function DVD(){
-  let escolha1 = prompt('\n\n  Escreva o Numero da opção:\n\n      1 - Compartilhar\n      2 - Importar JSON', "1")
+  let escolha1 = prompt('\n\n  Escreva o Numero da opção:\n\n      1 - Compartilhar\n      2 - Importar JSON\n      3 - GitHub', "1")
   if(escolha1 == 1) {
     let escolha1_1 = prompt('\n\n  Escreva o Numero da opção:\n\n      1 - Compartilhar com Contatos\n      2 - Compartilhar em JSON', "1")
     Compartilhar(escolha1_1)
   }
   if(escolha1 == 2) {
     Importar()
+  }
+  if(escolha1 == 3) {
+    window.open('https://github.com/FellipeDerato/Lista-de-Compras', '_blank');
   }
 
 
