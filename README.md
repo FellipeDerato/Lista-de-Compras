@@ -4,7 +4,10 @@
 
 <h2>Visual e Funcionalidades</h2>
 
+<p>Tela inicial do app:</p>
 <img src="/Github/img1.png" alt="tela inicial do app" style="width: 300px">
-<video width="300" height="300" autoplay controls muted> 
-  <source src="/Github/vid1.mp4" type="video/mp4">
-</video>
+<p>Funcionalidades do app:</p>
+<img src="/Github/gif1.gif" alt="funcionalidades do app" style="width: 300px">  
+<p>Exemplo de como fica quando compartilhar, pode ser pros contatos, mas se não funcionar ele vai pra area de transferência, daí se não funcionar vai estar no console do navegador:</p>
+<img src="/Github/img2.png" alt="Exemplo de compartilhamento" style="width: 300px">  
+
